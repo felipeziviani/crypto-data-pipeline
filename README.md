@@ -1,7 +1,8 @@
 # Crypto Data Pipeline
 
-Este projeto implementa um **pipeline de dados em Python** para coletar informações de preços de criptomoedas através de uma API, realizar o tratamento desses dados e armazená-los em um **banco de dados PostgreSQL**.
+Pipeline de dados em Python para coleta e armazenamento de preços de criptomoedas utilizando API, Pandas e PostgreSQL.
 
+Este projeto implementa um **pipeline de dados em Python** para coletar informações de preços de criptomoedas através de uma API, realizar o tratamento desses dados e armazená-los em um **banco de dados PostgreSQL**.
 O projeto foi desenvolvido com o objetivo de praticar conceitos fundamentais de **engenharia de dados**, incluindo extração, transformação e carga de dados (ETL), manipulação de dados com Python e integração com banco de dados.
 
 ---
