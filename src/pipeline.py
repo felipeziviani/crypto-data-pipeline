@@ -1,16 +1,18 @@
-from extract import extract_data
-from load import load_data
-from transform import transform_data
+import logging
+from src.load import load_data
+from src.transform import transform_data
+from src.extract import extract_data
 
 def pipeline():
 
-    print("Iniciando pipeline...") 
-
+    logging.info("Iniciando pipeline...") 
     dados = extract_data()
-    df = transform_data(dados)
-    load_data(df)
 
-    print("Pipeline executado com sucesso!")
+    logging.info("Transformando dados...")
+    df = transform_data(dados)
+
+    logging.info("Carregando dados no banco...")
+    load_data(df)
     
 if __name__ == "__main__":
     pipeline()

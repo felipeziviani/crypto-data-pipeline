@@ -9,52 +9,40 @@ O projeto foi desenvolvido com o objetivo de praticar conceitos fundamentais de 
 
 # Tecnologias utilizadas
 
-* Python
-* Pandas
-* Requests
-* PostgreSQL
-* python-dotenv
+- Python
+- Pandas
+- Requests
+- PostgreSQL
+- python-dotenv
+- Logging
 
 ---
 
 # Estrutura do projeto
 
 ```
-project/
+projeto-pipeline-cripto/
 │
-├── src/                      # Código do pipeline
-│   ├── extract.py            # Extração de dados da API
-│   ├── transform.py          # Tratamento e transformação dos dados
-│   ├── load.py               # Inserção dos dados no banco PostgreSQL
-│   └── pipeline.py           # Orquestração do pipeline
+├── src/
+│   ├── extract.py          # Extração dos dados da API
+│   ├── transform.py        # Tratamento e transformação dos dados
+│   ├── load.py             # Inserção dos dados no PostgreSQL
+│   └── pipeline.py         # Orquestração do pipeline
 │
-├── .env.example              # Exemplo de variáveis de ambiente
+├── data/                   # Arquivos CSV gerados pelo pipeline
+│
+├── logs/
+│   └── pipeline.log        # Logs de execução
+│
+├── logger_config.py        # Configuração de logs
+├── scheduler.py            # Agendamento do pipeline
+├── main.py                 # Arquivo principal para executar o projeto
+│
+├── .env                    # Variáveis de ambiente (não versionado)
 ├── .gitignore
 ├── requirements.txt
 └── README.md
 ```
-
----
-
-# Funcionamento do pipeline
-
-O pipeline segue o fluxo clássico de **ETL**:
-
-### 1. Extração
-
-O módulo `extract.py` coleta dados de preços de criptomoedas a partir de uma API.
-
-### 2. Transformação
-
-O módulo `transform.py` realiza o tratamento e a organização dos dados utilizando **Pandas**.
-
-### 3. Carga
-
-O módulo `load.py` salva os dados tratados em um **banco de dados PostgreSQL**.
-
-### 4. Orquestração
-
-O arquivo `pipeline.py` executa todas as etapas do pipeline na ordem correta.
 
 ---
 
@@ -64,8 +52,10 @@ O arquivo `pipeline.py` executa todas as etapas do pipeline na ordem correta.
 
 ```bash
 git clone <url-do-repositorio>
-cd nome-do-projeto
+cd projeto-pipeline-cripto
 ```
+
+---
 
 ## 2. Instalar as dependências
 
@@ -73,7 +63,9 @@ cd nome-do-projeto
 pip install -r requirements.txt
 ```
 
-## 3. Criar o arquivo `.env`
+---
+
+## 3. Configurar variáveis de ambiente
 
 Crie um arquivo `.env` na raiz do projeto com as credenciais do banco de dados.
 
@@ -87,32 +79,44 @@ POSTGRES_USER=postgres
 POSTGRES_PASSWORD=sua_senha
 ```
 
+---
+
 ## 4. Executar o pipeline
 
-```
-python src/pipeline.py
+```bash
+python main.py
 ```
 
-Após a execução, os dados serão coletados, processados e armazenados no banco de dados configurado.
+O pipeline irá:
+
+1. Coletar dados de preços de criptomoedas através de uma API  
+2. Transformar os dados utilizando **Pandas**  
+3. Salvar os dados no **PostgreSQL**  
+4. Registrar logs da execução
 
 ---
 
-# Objetivo do projeto
+# Logs
 
-Este projeto foi desenvolvido como prática em:
+Os logs de execução são registrados no arquivo:
 
-* Construção de pipelines de dados
-* Consumo de APIs
-* Manipulação de dados com Pandas
-* Persistência de dados em banco relacional
-* Organização de projetos Python para engenharia de dados
+```
+logs/pipeline.log
+```
 
 ---
 
-# Possíveis melhorias futuras
+# Agendamento
 
-* Agendamento automático do pipeline
-* Containerização com Docker
-* Orquestração com Airflow
-* Integração com Data Warehouse
-* Criação de dashboards para visualização dos dados
+O projeto possui um arquivo `scheduler.py` que permite executar o pipeline automaticamente em horários definidos.
+
+---
+
+# Possíveis melhorias
+
+Algumas melhorias que podem ser adicionadas futuramente:
+
+- containerização com Docker
+- orquestração com Airflow
+- integração com um Data Warehouse
+- criação de dashboards para visualização dos dados

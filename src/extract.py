@@ -1,4 +1,5 @@
 import requests
+import logging
 
 def extract_data():
     
@@ -15,5 +16,5 @@ def extract_data():
         return response.json()
     
     except requests.exceptions.RequestException as erro:
-        print(f'Erro ao acessar API: {erro}')
+        logging.error(f'Erro ao acessar API: {erro}')
     return None

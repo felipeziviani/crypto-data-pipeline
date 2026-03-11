@@ -1,5 +1,6 @@
 import psycopg2
 import os
+import logging
 from dotenv import load_dotenv
 
 load_dotenv()
@@ -7,7 +8,7 @@ load_dotenv()
 def load_data(df):
 
     if df is None or df.empty:
-        print("Nenhum dado para salvar.")
+        logging.info("Nenhum dado para salvar.")
         return
 
     conn = psycopg2.connect(
@@ -35,4 +36,4 @@ def load_data(df):
     cursor.close()
     conn.close()
 
-    print("Dados salvos no PostgreSQL.")
+    logging.info(f"{len(df)} registros inseridos no PostgreSQL.")
