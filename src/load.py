@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 def load_data(df):
 
     if df is None or df.empty:
@@ -20,6 +21,17 @@ def load_data(df):
     )
 
     cursor = conn.cursor()
+
+    # cria a tabela caso não exista
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS cotacoes (
+            id SERIAL PRIMARY KEY,
+            moeda VARCHAR(50),
+            preco_usd NUMERIC,
+            data_coleta TIMESTAMP,
+            UNIQUE (moeda, data_coleta)
+        )
+    """)
 
     for _, row in df.iterrows():
         cursor.execute(
